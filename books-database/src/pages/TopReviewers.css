@@ -1,0 +1,15 @@
+.container{
+}
+
+.table{
+  width: 100%;
+  border: solid;
+}
+
+.review-header{
+  display: flex;
+  align-items: left;
+  margin-left: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
