@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './Footer.css'
 
 function Footer() {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   return(
     <div className="footer">
       <div className="footer-items">
