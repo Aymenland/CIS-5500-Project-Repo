@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import './Pagination.css';
 
 function Pagination({currentPage,setCurrentPage, dataLength, indexOfLastRow}) {
-  console.log(dataLength);
 
   return(
     <nav className="pagination-container" aria-label="Page navigation example">

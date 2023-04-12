@@ -3,7 +3,7 @@
   "rds_port": "3306",
   "rds_user": "admin",
   "rds_password" : "CIS550group",
-  "rds_db": "cis550-project",
+  "rds_db": "CIS550_PROJECT",
   "server_host": "localhost",
   "server_port":"8080"
 }
