@@ -6,11 +6,13 @@ import BookSearch from './pages/BookSearch';
 import BookRecommendation from './pages/BookRecommendation';
 import TopPublishers from './pages/TopPublishers';
 import TopReviewers from './pages/TopReviewers';
+import Header from './components/header';
 
 function App() {
   return (
     <Router>
       <div className="App">
+        <Header />
         <Routes>
           <Route path="/" element={<BookSearch/>}/>
           <Route path="/search" element={<BookSearch/>}/>
