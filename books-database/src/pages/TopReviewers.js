@@ -1,8 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Pagination from '../components/Pagination';
 import './TopReviewers.css';
+import { reviews } from '../reviewersDb';
 
 function TopReviewers() {
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(15);
+
+  const indexOfLastRow = currentPage * rowsPerPage;
+  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+
+  const currentRows = reviews.slice(indexOfFirstRow, indexOfLastRow);
+
+  const reviewElement = currentRows.map(review => {
+    return(
+      <tr key={review.id}>
+        <th scope="row">{review.id}</th>
+        <td>{review.age}</td>
+        <td>{review.location}</td>
+        <td>{review.number_book}</td>
+        <td>{review.average_rating}</td>
+        <td>{review.highest}</td>
+        <td>{review.lowest}</td>
+      </tr>
+    )
+  })
+
   return(
     <div className="container">
       <h1 className="review-header">
@@ -11,6 +35,7 @@ function TopReviewers() {
       <table className="table table-striped">
       <thead>
         <tr>
+        <th scope="col">ID</th>
           <th scope="col">Age</th>
           <th scope="col">Location</th>
           <th scope="col">Number of Books Rated</th>
@@ -20,33 +45,10 @@ function TopReviewers() {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">34</th>
-          <td>New York, United States</td>
-          <td>3920</td>
-          <td>7</td>
-          <td>10</td>
-          <td>0</td>
-        </tr>
-        <tr>
-          <th scope="row">23</th>
-          <td>California, United States</td>
-          <td>3913</td>
-          <td>7</td>
-          <td>10</td>
-          <td>0</td>
-        </tr>
-        <tr>
-          <th scope="row">56</th>
-          <td>New York, United States</td>
-          <td>2940</td>
-          <td>5</td>
-          <td>10</td>
-          <td>3</td>
-        </tr>
+        {reviewElement}
       </tbody>
       </table>
-      <Pagination/>
+      <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} dataLength={currentRows.length} indexOfLastRow={indexOfLastRow} />
     </div>
   )
 }

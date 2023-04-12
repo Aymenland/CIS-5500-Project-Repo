@@ -1,6 +1,11 @@
 .pagination-container{
+  margin-top: 40px;
 }
 
 .page-link{
   color: black;
+}
+
+button.disabled{
+  cursor: not-allowed;
 }
