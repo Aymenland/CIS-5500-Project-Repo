@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Pagination from '../components/Pagination';
 import './TopReviewers.css';
 import { reviews } from '../reviewersDb';
+const config = require('../config.json')
 
 function TopReviewers() {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(15);
+  const [dbResult, setDbResult] = useState([]);
 
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
 
   const currentRows = reviews.slice(indexOfFirstRow, indexOfLastRow);
+
+  useEffect(() => {
+    fetch(`http://${config.server_host}:${config.server_port}/random`)
+      .then(res => res.json())
+      .then(resJson => console.log(resJson));
+  })
 
   const reviewElement = currentRows.map(review => {
     return(
