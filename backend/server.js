@@ -12,6 +12,7 @@ app.use(cors({
 // provide their handlers that we implemented in routes.js
 // app.get('/author/:type', routes.author);
 app.get('/random', routes.random);
+app.get('/top_publishers', routes.top_publishers);
 // app.get('/song/:song_id', routes.song);
 // app.get('/album/:album_id', routes.album);
 // app.get('/albums', routes.albums);
