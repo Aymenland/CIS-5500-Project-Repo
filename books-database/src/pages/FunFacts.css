@@ -1,0 +1,24 @@
+.fun-facts-container {
+    padding-top: 30px;
+}
+
+.fun-facts-header {
+    margin-bottom: 50px; /* Add space below the header */
+}
+
+.fun-fact-slide {
+    background-color: #f6ecd9;
+    border: 1px solid #ccc;
+    padding: 40px;
+    text-align: center;
+    width: 350px !important; /* Width of the note */
+    height: 450px; /* Height of the note */
+    margin: 10px auto; /* Center the note horizontally */
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2); /* Add a shadow effect */
+    font-size: 18px; /* Adjust the font size of the text */
+    line-height: 1.5; /* Adjust the line spacing of the text */
+    display: flex !important; /* Use flexbox to center the content vertically */
+    justify-content: center !important; /* Center the content horizontally */
+    align-items: center !important; /* Center the content vertically */
+}
+
