@@ -1,0 +1,12 @@
+.database-title{
+  position: absolute;
+  display: flex;
+  width: 180px;
+  height: 40px;
+  background-color: #01195B;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
