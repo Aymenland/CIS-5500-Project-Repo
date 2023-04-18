@@ -1,0 +1,30 @@
+.search-filters-container{
+  width: 100%;
+}
+
+.filter-option{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.filter-option > img{
+  width: 20px;
+  margin-right: 10px;
+}
+
+.filters-filter{
+  width: 200px;
+  border-color: #01195B;
+  border-width: 2px;
+  color: #01195B;
+  margin-right: 20px ;
+}
+
+.filters-wrapper{
+  display: flex;
+  margin: 30px 0;
+  justify-content: center;
+}
