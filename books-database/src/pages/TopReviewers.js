@@ -7,7 +7,7 @@ const config = require('../config.json')
 function TopReviewers() {
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(15);
+  const rowsPerPage = 15;
   const [dbResult, setDbResult] = useState([]);
 
   const indexOfLastRow = currentPage * rowsPerPage;
