@@ -13,6 +13,23 @@ const connection = mysql.createConnection({
 });
 connection.connect((err) => err && console.log(err));
 
+// Route 1: GET /books
+const books = async function(req, res) {
+  connection.query(`
+    SELECT *
+    FROM BOOKS
+    LIMIT 50
+  `, (err, data) => {
+    if (err || data.length === 0) {
+      console.log(err);
+      res.json({});
+    } else {
+      res.json({data});
+    }
+  });
+}
+
+
 // Route 2: GET /random
 const random = async function(req, res) {
   connection.query(`
@@ -49,6 +66,7 @@ const top_publishers = async function(req, res) {
 }
 
 module.exports = {
+  books,
   random,
   top_publishers,
 }
