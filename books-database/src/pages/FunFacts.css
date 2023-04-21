@@ -1,5 +1,6 @@
 .fun-facts-container {
     padding-top: 30px;
+    min-height: 88vh;
 }
 
 .fun-facts-header {

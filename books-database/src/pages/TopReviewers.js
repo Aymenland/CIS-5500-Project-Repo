@@ -16,9 +16,9 @@ function TopReviewers() {
   const currentRows = reviews.slice(indexOfFirstRow, indexOfLastRow);
 
   useEffect(() => {
-    fetch(`http://${config.server_host}:${config.server_port}/random`)
+    fetch(`http://${config.server_host}:${config.server_port}/top_reviewers`)
       .then(res => res.json())
-      .then(resJson => console.log(resJson));
+      .then(resJson => console.log(resJson.data));
   })
 
   const reviewElement = currentRows.map(review => {
