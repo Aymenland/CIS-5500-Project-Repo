@@ -6,6 +6,11 @@ import BookComponent from '../components/BookComponent';
 import Pagination from '../components/Pagination';
 const config = require('../config.json')
 
+//TO DO:
+//1. Average Ratings
+//2. Search Functions
+//3. Filter
+
 function BookSearch() {
   const [currentPage, setCurrentPage] = useState(1);
   const [books, setBooks] = useState([]);
