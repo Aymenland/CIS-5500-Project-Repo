@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Pagination from '../components/Pagination';
 import './TopReviewers.css';
-import { reviews } from '../reviewersDb';
 const config = require('../config.json')
 
 function TopReviewers() {
+
+  //TODO: highest and lowest ratings given by the user is not ready yet
 
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 15;
@@ -13,24 +14,24 @@ function TopReviewers() {
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
 
-  const currentRows = reviews.slice(indexOfFirstRow, indexOfLastRow);
+  const currentRows = dbResult.slice(indexOfFirstRow, indexOfLastRow);
 
   useEffect(() => {
     fetch(`http://${config.server_host}:${config.server_port}/top_reviewers`)
       .then(res => res.json())
-      .then(resJson => console.log(resJson.data));
+      .then(resJson => setDbResult(resJson.data));
   })
 
   const reviewElement = currentRows.map(review => {
     return(
-      <tr key={review.id}>
-        <th scope="row">{review.id}</th>
-        <td>{review.age}</td>
-        <td>{review.location}</td>
-        <td>{review.number_book}</td>
-        <td>{review.average_rating}</td>
-        <td>{review.highest}</td>
-        <td>{review.lowest}</td>
+      <tr key={review.User_ID}>
+        <th scope="row">{review.User_ID}</th>
+        <td>{review.Age}</td>
+        <td>{review.Location}</td>
+        <td>{review.Book_Count}</td>
+        <td>{review.Average_Rating}</td>
+        <td>{10}</td>
+        <td>{0}</td>
       </tr>
     )
   })
@@ -56,7 +57,7 @@ function TopReviewers() {
         {reviewElement}
       </tbody>
       </table>
-      <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} dataLength={currentRows.length} indexOfLastRow={indexOfLastRow} />
+      <Pagination numPage={[1,2,3,4,5,6,7]} currentPage={currentPage} setCurrentPage={setCurrentPage} dataLength={currentRows.length} indexOfLastRow={indexOfLastRow} />
     </div>
   )
 }

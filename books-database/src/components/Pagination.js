@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Pagination.css';
 
-function Pagination({currentPage,setCurrentPage, indexOfLastRow}) {
+function Pagination({numPage, currentPage,setCurrentPage, indexOfLastRow}) {
+  
 
   return(
     <nav className="pagination-container" aria-label="Page navigation example">
@@ -12,10 +13,12 @@ function Pagination({currentPage,setCurrentPage, indexOfLastRow}) {
             <span aria-hidden="true">&laquo;</span>
           </button>
         </li>
-        <li className={currentPage === 1 ? "page-item active" : "page-item"}><button disabled={currentPage === 1} className="page-link" onClick={() => setCurrentPage(1)}>1</button></li>
-        <li className={currentPage === 2 ? "page-item active" : "page-item"}><button disabled={currentPage === 2} className="page-link" onClick={() => setCurrentPage(2)}>2</button></li>
-        <li className={currentPage === 3 ? "page-item active" : "page-item"}><button disabled={currentPage === 3 || indexOfLastRow < 16 } className="page-link" onClick={() => setCurrentPage(3)}>3</button></li>
-        <li className={ indexOfLastRow < 16 ? "page-item disabled" : "page-item"}>
+        {numPage.map(page => {
+          return(
+            <li key={page} className={currentPage === page ? "page-item active" : "page-item"}><button disabled={currentPage === page} className="page-link" onClick={() => setCurrentPage(page)}>{page}</button></li>
+          )
+        })}
+        <li className={ indexOfLastRow > 16 ? "page-item disabled" : "page-item"}>
           <button onClick={() => setCurrentPage(currentPage + 1)} className="page-link" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
           </button>
@@ -28,6 +31,7 @@ function Pagination({currentPage,setCurrentPage, indexOfLastRow}) {
 export default Pagination;
 
 Pagination.propTypes = {
+  numPage: PropTypes.array.isRequired,
   currentPage: PropTypes.number.isRequired,
   setCurrentPage: PropTypes.func.isRequired,
   indexOfLastRow: PropTypes.number.isRequired,
