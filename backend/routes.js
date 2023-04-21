@@ -30,8 +30,8 @@ const books = async function(req, res) {
 }
 
 
-// Route 2: GET /random
-const random = async function(req, res) {
+// Route 2: GET /topreviewers
+const top_reviewers = async function(req, res) {
   connection.query(`
     SELECT *
     FROM USERS
@@ -67,6 +67,6 @@ const top_publishers = async function(req, res) {
 
 module.exports = {
   books,
-  random,
+  top_reviewers,
   top_publishers,
 }
