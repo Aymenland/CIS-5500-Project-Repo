@@ -16,9 +16,12 @@ connection.connect((err) => err && console.log(err));
 // Route 1: GET /books
 const books = async function(req, res) {
   connection.query(`
-    SELECT *
-    FROM BOOKS
-    LIMIT 150
+    SELECT B.*, AVG(R.Rating) AS AvgRating
+    FROM BOOKS B
+    LEFT JOIN RATINGS R ON B.ISBN = R.ISBN
+    GROUP BY B.ISBN
+    ORDER BY RAND()
+    LIMIT 100;
   `, (err, data) => {
     if (err || data.length === 0) {
       console.log(err);
@@ -54,8 +57,8 @@ const top_publishers = async function(req, res) {
     
   connection.query(`    
   SELECT b.Publisher, count(b.ISBN) as NumOfBooks, avg(r.Book-Rating) as avgRating, count(u.User-ID) as NumOfReviewers
-  FROM Books b JOIN Ratings r on b.ISBN = r.ISBN
-  JOIN Users u on r.User-ID = u.User-ID
+  FROM BOOKS b JOIN RATINGS r on b.ISBN = r.ISBN
+  JOIN USERS u on r.User-ID = u.User-ID
   GROUP BY b.Publisher
   ORDER BY count(b.ISBN) desc`, (err, data) => {
     if (err || data.length === 0) {

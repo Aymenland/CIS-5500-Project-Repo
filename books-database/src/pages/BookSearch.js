@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect } from 'react';
 import './BookSearch.css';
 import SearchBar from '../components/SearchBar';
 import SearchFilters from '../components/SearchFilters';
@@ -7,7 +7,6 @@ import Pagination from '../components/Pagination';
 const config = require('../config.json')
 
 //TO DO:
-//1. Average Ratings
 //2. Search Functions
 //3. Filter
 
@@ -23,13 +22,17 @@ function BookSearch() {
   
   const indexOfLastElement = currentPage * rowsPerPage * 4;
   const indexOfFirstElement = indexOfLastElement - rowsPerPage * 4;
+  let currentBooks;
 
   useEffect(() => {
     fetch(`http://${config.server_host}:${config.server_port}/books`)
       .then(res => res.json())
       .then(resJson => setBooks(resJson.data));
-  })
-  const currentBooks = books.slice(indexOfFirstElement, indexOfLastElement);
+  },[])
+
+  if (books) {
+    currentBooks = books.slice(indexOfFirstElement, indexOfLastElement);
+  }
   
   return(
     <div>
@@ -37,7 +40,7 @@ function BookSearch() {
       <SearchBar/>
       <SearchFilters filters={filters} setFilters={setFilters}/>
       <BookComponent result={currentBooks} />
-      <Pagination numPage={[1,2,3,4,5,6,7,8,9,10]} currentPage={currentPage} setCurrentPage={setCurrentPage} indexOfLastRow={currentBooks.length} maxRowPerPage={16} />
+      {currentBooks && <Pagination numPage={[1,2,3,4,5,6,7,8,9,10]} currentPage={currentPage} setCurrentPage={setCurrentPage} indexOfLastRow={currentBooks.length} maxRowPerPage={16} />}
     </div>
   )
 }
