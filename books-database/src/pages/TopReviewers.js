@@ -4,9 +4,6 @@ import './TopReviewers.css';
 const config = require('../config.json')
 
 function TopReviewers() {
-
-  //TODO: age and location of the user is not ready yet
-
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 15;
   const [dbResult, setDbResult] = useState([]);
@@ -27,8 +24,8 @@ function TopReviewers() {
       return(
         <tr key={review.User_Id}>
           <th scope="row">{review.User_Id}</th>
-          <td>10</td>
-          <td>N/A</td>
+          <td>{review.age}</td>
+          <td>{review.location}</td>
           <td>{review.BooksReviewed}</td>
           <td>{review.AvgRating}</td>
           <td>{review.HighestRating}</td>
@@ -37,7 +34,6 @@ function TopReviewers() {
       )
     })
   }
-
   return(
     <div className="container">
       <h1 className="review-header">

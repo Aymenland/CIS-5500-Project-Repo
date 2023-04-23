@@ -33,7 +33,7 @@ const books = async function(req, res) {
 // Route 2: GET /topreviewers
 const top_reviewers = async function(req, res) {
   connection.query(`
-    SELECT U.User_Id, COUNT(R.ISBN) AS BooksReviewed, AVG(R.Rating) AS AvgRating, MAX(R.Rating) AS HighestRating, MIN(R.Rating) AS LowestRating
+    SELECT U.User_Id, U.age, U.location, COUNT(R.ISBN) AS BooksReviewed, AVG(R.Rating) AS AvgRating, MAX(R.Rating) AS HighestRating, MIN(R.Rating) AS LowestRating
     FROM USERS U
     INNER JOIN RATINGS R ON U.User_Id = R.User_Id
     GROUP BY U.User_Id
