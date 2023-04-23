@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Pagination.css';
 
-function Pagination({numPage, currentPage,setCurrentPage, indexOfLastRow}) {
-  
-
+function Pagination({numPage, maxRowPerPage, currentPage,setCurrentPage, indexOfLastRow}) {
   return(
     <nav className="pagination-container" aria-label="Page navigation example">
       <ul className="pagination justify-content-center">
@@ -18,7 +16,7 @@ function Pagination({numPage, currentPage,setCurrentPage, indexOfLastRow}) {
             <li key={page} className={currentPage === page ? "page-item active" : "page-item"}><button disabled={currentPage === page} className="page-link" onClick={() => setCurrentPage(page)}>{page}</button></li>
           )
         })}
-        <li className={ indexOfLastRow > 16 ? "page-item disabled" : "page-item"}>
+        <li className={ indexOfLastRow <  maxRowPerPage ? "page-item disabled" : "page-item"}>
           <button onClick={() => setCurrentPage(currentPage + 1)} className="page-link" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
           </button>
@@ -31,6 +29,7 @@ function Pagination({numPage, currentPage,setCurrentPage, indexOfLastRow}) {
 export default Pagination;
 
 Pagination.propTypes = {
+  maxRowPerPage: PropTypes.number.isRequired,
   numPage: PropTypes.array.isRequired,
   currentPage: PropTypes.number.isRequired,
   setCurrentPage: PropTypes.func.isRequired,

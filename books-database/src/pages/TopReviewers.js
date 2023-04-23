@@ -5,7 +5,7 @@ const config = require('../config.json')
 
 function TopReviewers() {
 
-  //TODO: highest and lowest ratings given by the user is not ready yet
+  //TODO: age and location of the user is not ready yet
 
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 15;
@@ -13,28 +13,30 @@ function TopReviewers() {
 
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-
-  const currentRows = dbResult.slice(indexOfFirstRow, indexOfLastRow);
+  let currentRows;
+  let reviewElement;
 
   useEffect(() => {
     fetch(`http://${config.server_host}:${config.server_port}/top_reviewers`)
       .then(res => res.json())
       .then(resJson => setDbResult(resJson.data));
   })
-
-  const reviewElement = currentRows.map(review => {
-    return(
-      <tr key={review.User_ID}>
-        <th scope="row">{review.User_ID}</th>
-        <td>{review.Age}</td>
-        <td>{review.Location}</td>
-        <td>{review.Book_Count}</td>
-        <td>{review.Average_Rating}</td>
-        <td>{10}</td>
-        <td>{0}</td>
-      </tr>
-    )
-  })
+  if (dbResult) {
+    currentRows = dbResult.slice(indexOfFirstRow, indexOfLastRow);
+    reviewElement = currentRows.map(review => {
+      return(
+        <tr key={review.User_Id}>
+          <th scope="row">{review.User_Id}</th>
+          <td>10</td>
+          <td>N/A</td>
+          <td>{review.BooksReviewed}</td>
+          <td>{review.AvgRating}</td>
+          <td>{review.HighestRating}</td>
+          <td>{review.LowestRating}</td>
+        </tr>
+      )
+    })
+  }
 
   return(
     <div className="container">
@@ -57,7 +59,7 @@ function TopReviewers() {
         {reviewElement}
       </tbody>
       </table>
-      <Pagination numPage={[1,2,3,4,5,6,7]} currentPage={currentPage} setCurrentPage={setCurrentPage} dataLength={currentRows.length} indexOfLastRow={indexOfLastRow} />
+      {currentRows && <Pagination numPage={[1,2,3,4,5,6,7]} currentPage={currentPage} setCurrentPage={setCurrentPage} maxRowPerPage={15} indexOfLastRow={currentRows.length} />}
     </div>
   )
 }
