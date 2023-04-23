@@ -18,7 +18,7 @@ const books = async function(req, res) {
   connection.query(`
     SELECT *
     FROM BOOKS
-    LIMIT 50
+    LIMIT 150
   `, (err, data) => {
     if (err || data.length === 0) {
       console.log(err);
@@ -33,9 +33,12 @@ const books = async function(req, res) {
 // Route 2: GET /topreviewers
 const top_reviewers = async function(req, res) {
   connection.query(`
-    SELECT *
-    FROM USERS
-    LIMIT 4
+    SELECT U.User_Id, U.age, U.location, COUNT(R.ISBN) AS BooksReviewed, AVG(R.Rating) AS AvgRating, MAX(R.Rating) AS HighestRating, MIN(R.Rating) AS LowestRating
+    FROM USERS U
+    INNER JOIN RATINGS R ON U.User_Id = R.User_Id
+    GROUP BY U.User_Id
+    ORDER BY BooksReviewed DESC
+    LIMIT 100;
   `, (err, data) => {
     if (err || data.length === 0) {
       console.log(err);
