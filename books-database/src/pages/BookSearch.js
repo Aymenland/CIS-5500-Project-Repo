@@ -13,6 +13,7 @@ const config = require('../config.json')
 function BookSearch() {
   const [currentPage, setCurrentPage] = useState(1);
   const [books, setBooks] = useState([]);
+  const [keywords, setKeywords] = useState('');
   const [filters, setFilters] = useState({
     book: 'default',
     rating: 'default',
@@ -30,14 +31,21 @@ function BookSearch() {
       .then(resJson => setBooks(resJson.data));
   },[])
 
+
+  const handleSearch = () => {
+    fetch(`http://${config.server_host}:${config.server_port}/search/${keywords}`)
+      .then(res => res.json())
+      .then(resJson => setBooks(resJson.data));
+  }
+  
   if (books) {
     currentBooks = books.slice(indexOfFirstElement, indexOfLastElement);
   }
-  
+
   return(
     <div>
       <div className='database-title'>Books Database</div>
-      <SearchBar/>
+      <SearchBar keyword={keywords} setKeyword={setKeywords} handleSearch={handleSearch} />
       <SearchFilters filters={filters} setFilters={setFilters}/>
       <BookComponent result={currentBooks} />
       {currentBooks && <Pagination numPage={[1,2,3,4,5,6,7,8,9,10]} currentPage={currentPage} setCurrentPage={setCurrentPage} indexOfLastRow={currentBooks.length} maxRowPerPage={16} />}

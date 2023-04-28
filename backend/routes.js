@@ -52,6 +52,27 @@ const top_reviewers = async function(req, res) {
   });
 }
 
+// Route 3: GET /search/:keywords
+const search = async function(req, res) {
+  connection.query(`
+    SELECT B.*, AVG(R.Rating) AS AvgRating
+    FROM BOOKS B
+    LEFT JOIN RATINGS R ON B.ISBN = R.ISBN
+    WHERE B.Title LIKE '%${req.params.keywords}%'
+      OR B.Author LIKE '%${req.params.keywords}%'
+    GROUP BY B.ISBN
+    LIMIT 100
+  `, (err,data) => {
+    if(err || data.length === 0){
+      console.log(data.length);
+      console.log(err);
+      res.json({});
+    } else {
+      res.json({data});
+    }
+  });
+}
+
 // Route 8: GET /top_publishers
 const top_publishers = async function(req, res) {
     
@@ -73,6 +94,7 @@ const top_publishers = async function(req, res) {
 
 module.exports = {
   books,
+  search,
   top_reviewers,
   top_publishers,
 }
