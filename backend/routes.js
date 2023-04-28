@@ -64,7 +64,6 @@ const search = async function(req, res) {
     LIMIT 100
   `, (err,data) => {
     if(err || data.length === 0){
-      console.log(data.length);
       console.log(err);
       res.json({});
     } else {
