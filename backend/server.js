@@ -11,6 +11,7 @@ app.use(cors({
 // We use express to define our various API endpoints and
 // provide their handlers that we implemented in routes.js
 app.get('/books', routes.books);
+app.get('/search/:keywords', routes.search);
 app.get('/top_reviewers', routes.top_reviewers);
 app.get('/top_publishers', routes.top_publishers);
 
