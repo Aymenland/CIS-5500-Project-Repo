@@ -73,22 +73,28 @@ const search = async function(req, res) {
   });
 }
 
-// Route 8: GET /top_publishers
+// Route 6: GET /top_publishers
 const top_publishers = async function(req, res) {
     
-  connection.query(`    
-  SELECT b.Publisher, count(b.ISBN) as NumOfBooks, avg(r.Book-Rating) as avgRating, count(u.User-ID) as NumOfReviewers
-  FROM BOOKS b JOIN RATINGS r on b.ISBN = r.ISBN
-  JOIN USERS u on r.User-ID = u.User-ID
-  GROUP BY b.Publisher
-  ORDER BY count(b.ISBN) desc`, (err, data) => {
+  connection.query(`     
+  WITH book_avg_ratings AS (
+    SELECT ISBN, AVG(Rating) AS Avg_Rating, count(u.User_ID) as NumOfReviewers
+    FROM RATINGS r JOIN USERS u on r.User_ID = u.User_ID
+    GROUP BY ISBN)
+   
+   SELECT b.Publisher, AVG(bar.Avg_Rating) AS Avg_Publisher_Rating, count(bar.NumOfReviewers) AS Number_Of_Reviewers
+   FROM BOOKS b JOIN book_avg_ratings bar ON b.ISBN = bar.ISBN
+   GROUP BY b.Publisher, bar.NumOfReviewers
+   ORDER BY Avg_Publisher_Rating DESC
+   LIMIT 10;`, (err, data) => {
     if (err || data.length === 0) {
       console.log(err);
       res.json({});
     } else {
       res.json(data);
       }
-  });  
+  });
+  
 }
 
 // Route: GET /funfacts
