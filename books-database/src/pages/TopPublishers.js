@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Pagination from '../components/Pagination';
 import './TopPublishers.css';
 const config = require('../config.json')
 
@@ -9,7 +10,6 @@ function TopPublishers() {
 
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-
   let currentRows;
   let publisherElement;
 
@@ -23,7 +23,7 @@ function TopPublishers() {
     publisherElement = currentRows.map(publisher => {
       return(
         <tr key={publisher.Publisher}>
-          <th scope="row">{publisher.Publisher}</th>
+          <th  scope="row">{publisher.Publisher}</th>
           <td>{publisher.Avg_Publisher_Rating}</td>
           <td>{publisher.Number_Of_Reviewers}</td>
       </tr>
@@ -47,7 +47,7 @@ function TopPublishers() {
         {publisherElement}
       </tbody>
       </table>
-      
+      {currentRows && <Pagination numPage={[1,2,3,4,5,6,7,8,9,10]} currentPage={currentPage} setCurrentPage={setCurrentPage} maxRowPerPage={10} indexOfLastRow={currentRows.length} />}
     </div>
   )
 }
