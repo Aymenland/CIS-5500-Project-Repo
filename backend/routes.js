@@ -86,12 +86,12 @@ const top_publishers = async function(req, res) {
    FROM BOOKS b JOIN book_avg_ratings bar ON b.ISBN = bar.ISBN
    GROUP BY b.Publisher, bar.NumOfReviewers
    ORDER BY Avg_Publisher_Rating DESC
-   LIMIT 10;`, (err, data) => {
+   LIMIT 100;`, (err, data) => {
     if (err || data.length === 0) {
       console.log(err);
       res.json({});
     } else {
-      res.json(data);
+      res.json({data});
       }
   });
   
