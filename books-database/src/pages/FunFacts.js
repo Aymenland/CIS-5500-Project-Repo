@@ -1,20 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './FunFacts.css';
+const config = require('../config.json')
 
 const FunFacts = () => {
-    // Define an array of fun facts about books
-    const funFacts = [
-        'Did you know that the first book ever printed was the Bible?',
-        'The longest book ever written has over two million words!',
-        'The Harry Potter book series is the best-selling book series in history.',
-        'Agatha Christie is the best-selling novelist of all time, with over 2 billion copies of her detective novels sold worldwide.',
-        'The longest sentence ever printed in a book is found in Victor Hugo\'s "Les Misérables." ' +
-        'It consists of 823 words and has no periods or commas, only semicolons and dashes..',
+    const [funFacts, setFunFacts] = useState([]);
 
-    ];
+    useEffect(() => {
+        // Fetch fun facts data from server
+        fetch(`http://${config.server_host}:${config.server_port}/fun_facts`)
+            .then(response => response.json())
+            .then(data => {
+                // Update the funFacts state with the data received from the server
+                setFunFacts(data);
+            })
+            .catch(error => {
+                console.error('Error fetching fun facts:', error);
+            });
+    }, []);
 
     const sliderSettings = {
         dots: true,

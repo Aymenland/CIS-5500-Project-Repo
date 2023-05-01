@@ -1,9 +1,9 @@
 <h2>Group Members (Full Name, Email, Github Username)</h2>
 
 Aymen Saidi, asaidi@seas.upenn.edu, Aymenland<br>
-Jeangardy Thermitus, jtherm@seas.upenn.edu, candylyt<br>
+Jeangardy Thermitus, jtherm@seas.upenn.edu, jtherm<br>
 Olha Loiek, loiek@sas.upenn.edu, olgaloiek<br>
-Yuting Liu, candylyt@seas.upenn.edu, jtherm<br>
+Yuting Liu, candylyt@seas.upenn.edu, candylyt<br>
 
 <h2>Project Description</h2>
 

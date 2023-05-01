@@ -14,6 +14,7 @@ app.get('/books', routes.books);
 app.get('/search/:keywords', routes.search);
 app.get('/top_reviewers', routes.top_reviewers);
 app.get('/top_publishers', routes.top_publishers);
+app.get('/fun_facts', routes.fun_facts);
 
 
 app.listen(config.server_port, () => {
